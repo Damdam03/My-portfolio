@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Damvic Velasco — Full-Stack Developer &amp; Systems Builder</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0b1512;
+    --ink-2:#0f1c18;
+    --panel:#132521;
+    --line:#233a34;
+    --ivory:#f3efe6;
+    --sage:#8ba39a;
+    --sage-dim:#5d746c;
+    --amber:#e8a33d;
+    --teal:#4fd1c5;
+    --radius:14px;
+    --font-display:'Space Grotesk', sans-serif;
+    --font-body:'IBM Plex Sans', sans-serif;
+    --font-mono:'IBM Plex Mono', monospace;
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+
+  html{scroll-behavior:smooth;}
+
+  body{
+    background:var(--ink);
+    color:var(--ivory);
+    font-family:var(--font-body);
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important; scroll-behavior:auto !important;}
+  }
+
+  a{color:inherit; text-decoration:none;}
+
+  .wrap{max-width:1180px; margin:0 auto; padding:0 32px;}
+
+  /* ---------- background texture ---------- */
+  .bg-grid{
+    position:fixed; inset:0; z-index:0; pointer-events:none;
+    background-image:
+      linear-gradient(rgba(143,167,155,0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(143,167,155,0.05) 1px, transparent 1px);
+    background-size:56px 56px;
+    mask-image:radial-gradient(ellipse 80% 60% at 50% 0%, black 40%, transparent 90%);
+  }
+  .bg-glow{
+    position:fixed; top:-20%; left:50%; transform:translateX(-50%);
+    width:900px; height:900px; z-index:0; pointer-events:none;
+    background:radial-gradient(circle, rgba(79,209,197,0.10) 0%, rgba(232,163,61,0.05) 35%, transparent 70%);
+  }
+
+  main, header, footer{position:relative; z-index:1;}
+
+  /* ---------- nav ---------- */
+  header{
+    position:fixed; top:0; left:0; right:0; z-index:50;
+    backdrop-filter:blur(10px);
+    background:rgba(11,21,18,0.72);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:18px 32px; max-width:1180px; margin:0 auto;
+  }
+  .brand{
+    font-family:var(--font-mono); font-size:0.95rem; letter-spacing:0.02em;
+    display:flex; align-items:center; gap:10px;
+  }
+  .brand-dot{
+    width:8px; height:8px; border-radius:50%; background:var(--teal);
+    box-shadow:0 0 0 4px rgba(79,209,197,0.15);
+    animation:pulse-dot 2.4s ease-in-out infinite;
+  }
+  @keyframes pulse-dot{
+    0%,100%{box-shadow:0 0 0 4px rgba(79,209,197,0.15);}
+    50%{box-shadow:0 0 0 7px rgba(79,209,197,0.05);}
+  }
+  .nav-links{display:flex; gap:34px; font-family:var(--font-mono); font-size:0.8rem; letter-spacing:0.04em;}
+  .nav-links a{color:var(--sage); position:relative; padding-bottom:4px; transition:color 0.2s;}
+  .nav-links a:hover, .nav-links a:focus-visible{color:var(--ivory);}
+  .nav-links a::after{
+    content:''; position:absolute; left:0; bottom:0; width:0; height:1px; background:var(--amber);
+    transition:width 0.25s ease;
+  }
+  .nav-links a:hover::after, .nav-links a:focus-visible::after{width:100%;}
+  .nav-cta{
+    font-family:var(--font-mono); font-size:0.78rem; border:1px solid var(--line);
+    padding:8px 16px; border-radius:8px; color:var(--ivory); transition:border-color 0.2s, background 0.2s;
+  }
+  .nav-cta:hover{border-color:var(--amber); background:rgba(232,163,61,0.08);}
+
+  /* ---------- hero ---------- */
+  .hero{
+    min-height:100vh; display:flex; flex-direction:column; justify-content:center;
+    padding-top:120px; padding-bottom:80px;
+  }
+  .eyebrow{
+    font-family:var(--font-mono); font-size:0.78rem; letter-spacing:0.12em; text-transform:uppercase;
+    color:var(--teal); display:flex; align-items:center; gap:10px; margin-bottom:22px;
+  }
+  .eyebrow::before{content:'//'; color:var(--sage-dim);}
+  h1.hero-title{
+    font-family:var(--font-display); font-weight:700;
+    font-size:clamp(2.6rem, 7vw, 5.6rem); line-height:1.02; letter-spacing:-0.02em;
+    max-width:900px;
+  }
+  .hero-title .accent{color:var(--amber);}
+  .hero-sub{
+    max-width:620px; margin-top:26px; font-size:1.08rem; color:var(--sage);
+  }
+  .hero-actions{display:flex; gap:16px; margin-top:38px; flex-wrap:wrap;}
+  .btn{
+    font-family:var(--font-mono); font-size:0.85rem; padding:14px 26px; border-radius:9px;
+    display:inline-flex; align-items:center; gap:8px; transition:transform 0.2s, box-shadow 0.2s, background 0.2s;
+  }
+  .btn-primary{background:var(--amber); color:#161008; font-weight:600;}
+  .btn-primary:hover{transform:translateY(-2px); box-shadow:0 10px 30px -10px rgba(232,163,61,0.5);}
+  .btn-ghost{border:1px solid var(--line); color:var(--ivory);}
+  .btn-ghost:hover{border-color:var(--teal); transform:translateY(-2px);}
+
+  /* ---------- signature: status readout panel ---------- */
+  .readout{
+    margin-top:64px; border:1px solid var(--line); border-radius:var(--radius);
+    background:linear-gradient(180deg, rgba(19,37,33,0.6), rgba(19,37,33,0.25));
+    overflow:hidden;
+  }
+  .readout-head{
+    display:flex; justify-content:space-between; align-items:center;
+    padding:14px 22px; border-bottom:1px solid var(--line);
+    font-family:var(--font-mono); font-size:0.72rem; letter-spacing:0.08em; color:var(--sage);
+  }
+  .readout-head span.live{color:var(--teal); display:flex; align-items:center; gap:8px;}
+  .readout-head span.live::before{
+    content:''; width:6px; height:6px; border-radius:50%; background:var(--teal);
+    animation:pulse-dot 2s ease-in-out infinite;
+  }
+  .readout-body{display:grid; grid-template-columns:1.3fr 1fr; gap:0;}
+  @media (max-width:760px){.readout-body{grid-template-columns:1fr;}}
+  .wave-box{padding:18px 22px; border-right:1px solid var(--line);}
+  @media (max-width:760px){.wave-box{border-right:none; border-bottom:1px solid var(--line);}}
+  .wave-box svg{width:100%; height:90px; display:block;}
+  .wave-path{fill:none; stroke:var(--teal); stroke-width:2; stroke-linecap:round; stroke-linejoin:round;}
+  .metrics{padding:18px 22px; display:flex; flex-direction:column; gap:14px; justify-content:center;}
+  .metric-row{display:flex; justify-content:space-between; font-family:var(--font-mono); font-size:0.78rem;}
+  .metric-row .k{color:var(--sage);}
+  .metric-row .v{color:var(--ivory);}
+  .ticker-wrap{
+    border-top:1px solid var(--line); overflow:hidden; white-space:nowrap; padding:12px 0;
+  }
+  .ticker{display:inline-block; padding-left:100%; animation:ticker 26s linear infinite;}
+  .ticker span{font-family:var(--font-mono); font-size:0.75rem; color:var(--sage-dim); margin-right:40px;}
+  .ticker span b{color:var(--amber); font-weight:500;}
+  @keyframes ticker{ to { transform:translateX(-100%); } }
+
+  /* ---------- sections ---------- */
+  section{padding:120px 0;}
+  .section-head{margin-bottom:56px; max-width:640px;}
+  .section-tag{
+    font-family:var(--font-mono); font-size:0.75rem; letter-spacing:0.1em; text-transform:uppercase;
+    color:var(--amber); margin-bottom:14px; display:block;
+  }
+  h2.section-title{
+    font-family:var(--font-display); font-weight:600; font-size:clamp(1.8rem,3.4vw,2.6rem); letter-spacing:-0.01em;
+  }
+  .section-desc{color:var(--sage); margin-top:14px; font-size:1rem;}
+
+  .reveal{opacity:0; transform:translateY(24px); transition:opacity 0.7s ease, transform 0.7s ease;}
+  .reveal.is-visible{opacity:1; transform:translateY(0);}
+
+  /* ---------- about ---------- */
+  .about-grid{display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:start;}
+  @media (max-width:820px){.about-grid{grid-template-columns:1fr;}}
+  .about-text p{color:var(--sage); margin-bottom:18px; font-size:1.02rem;}
+  .about-text p strong{color:var(--ivory); font-weight:600;}
+  .lang-row{display:flex; gap:10px; margin-top:22px; flex-wrap:wrap;}
+  .lang-pill{
+    font-family:var(--font-mono); font-size:0.75rem; border:1px solid var(--line); border-radius:20px;
+    padding:6px 14px; color:var(--sage);
+  }
+  .stat-panel{
+    border:1px solid var(--line); border-radius:var(--radius); padding:6px;
+    background:rgba(19,37,33,0.4);
+  }
+  .stat-row{
+    display:flex; justify-content:space-between; align-items:center; padding:18px 20px;
+    border-bottom:1px solid var(--line);
+  }
+  .stat-row:last-child{border-bottom:none;}
+  .stat-row .label{font-family:var(--font-mono); font-size:0.8rem; color:var(--sage);}
+  .stat-row .value{font-family:var(--font-display); font-weight:600; font-size:1.15rem; text-align:right;}
+
+  /* ---------- skills modules ---------- */
+  .module-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:20px;}
+  @media (max-width:900px){.module-grid{grid-template-columns:repeat(2,1fr);}}
+  @media (max-width:600px){.module-grid{grid-template-columns:1fr;}}
+  .module{
+    border:1px solid var(--line); border-radius:var(--radius); padding:26px;
+    background:var(--panel); transition:border-color 0.25s, transform 0.25s;
+  }
+  .module:hover{border-color:var(--teal); transform:translateY(-4px);}
+  .module-id{font-family:var(--font-mono); font-size:0.72rem; color:var(--sage-dim); letter-spacing:0.08em;}
+  .module-title{font-family:var(--font-display); font-weight:600; font-size:1.15rem; margin-top:8px; margin-bottom:14px;}
+  .module ul{list-style:none;}
+  .module li{
+    font-size:0.92rem; color:var(--sage); padding-left:16px; position:relative; margin-bottom:8px;
+  }
+  .module li::before{
+    content:''; position:absolute; left:0; top:9px; width:6px; height:1px; background:var(--amber);
+  }
+
+  /* ---------- projects ---------- */
+  .flagship{
+    display:grid; grid-template-columns:1.1fr 1fr; gap:0; border:1px solid var(--line);
+    border-radius:var(--radius); overflow:hidden; margin-bottom:26px; background:var(--panel);
+  }
+  @media (max-width:820px){.flagship{grid-template-columns:1fr;}}
+  .flagship-visual{
+    padding:32px; border-right:1px solid var(--line); display:flex; flex-direction:column; justify-content:center;
+    background:radial-gradient(circle at 30% 30%, rgba(79,209,197,0.08), transparent 60%);
+  }
+  @media (max-width:820px){.flagship-visual{border-right:none; border-bottom:1px solid var(--line);}}
+  .flagship-body{padding:32px; display:flex; flex-direction:column; justify-content:center;}
+  .tag-row{display:flex; gap:8px; flex-wrap:wrap; margin:16px 0 20px;}
+  .tag{
+    font-family:var(--font-mono); font-size:0.7rem; padding:5px 11px; border:1px solid var(--line);
+    border-radius:20px; color:var(--sage);
+  }
+  .flagship-title{font-family:var(--font-display); font-weight:600; font-size:1.7rem;}
+  .flagship-desc{color:var(--sage); margin-top:10px; font-size:0.98rem;}
+  .proj-link{
+    display:inline-flex; align-items:center; gap:8px; margin-top:22px; font-family:var(--font-mono);
+    font-size:0.82rem; color:var(--teal); border-bottom:1px solid transparent; transition:border-color 0.2s;
+    width:fit-content;
+  }
+  .proj-link:hover{border-color:var(--teal);}
+
+  .diagram{width:100%; height:auto;}
+
+  .proj-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:20px;}
+  @media (max-width:900px){.proj-grid{grid-template-columns:repeat(2,1fr);}}
+  @media (max-width:600px){.proj-grid{grid-template-columns:1fr;}}
+  .proj-card{
+    border:1px solid var(--line); border-radius:var(--radius); padding:24px; background:var(--panel);
+    transition:transform 0.25s, border-color 0.25s; display:flex; flex-direction:column; height:100%;
+  }
+  .proj-card:hover{transform:translateY(-4px); border-color:var(--amber);}
+  .proj-card .stack{font-family:var(--font-mono); font-size:0.68rem; color:var(--sage-dim); letter-spacing:0.06em; margin-bottom:12px;}
+  .proj-card h3{font-family:var(--font-display); font-size:1.1rem; font-weight:600; margin-bottom:10px;}
+  .proj-card p{font-size:0.9rem; color:var(--sage); flex-grow:1;}
+  .proj-card .proj-link{margin-top:16px;}
+
+  /* ---------- timeline ---------- */
+  .timeline{position:relative; padding-left:36px;}
+  .timeline::before{content:''; position:absolute; left:6px; top:6px; bottom:6px; width:1px; background:var(--line);}
+  .t-item{position:relative; padding-bottom:44px;}
+  .t-item:last-child{padding-bottom:0;}
+  .t-dot{
+    position:absolute; left:-36px; top:4px; width:12px; height:12px; border-radius:50%;
+    background:var(--ink); border:2px solid var(--teal);
+  }
+  .t-date{font-family:var(--font-mono); font-size:0.75rem; color:var(--amber); letter-spacing:0.06em;}
+  .t-title{font-family:var(--font-display); font-weight:600; font-size:1.15rem; margin-top:6px;}
+  .t-desc{color:var(--sage); margin-top:8px; font-size:0.93rem; max-width:600px;}
+
+  /* ---------- certs ---------- */
+  .cert-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:16px;}
+  @media (max-width:700px){.cert-grid{grid-template-columns:1fr;}}
+  .cert{
+    border:1px solid var(--line); border-radius:12px; padding:20px 22px; display:flex; gap:16px; align-items:flex-start;
+    background:var(--panel);
+  }
+  .cert-mark{
+    font-family:var(--font-mono); font-size:0.7rem; color:var(--teal); border:1px solid var(--line);
+    border-radius:8px; padding:6px 8px; white-space:nowrap; margin-top:2px;
+  }
+  .cert-name{font-weight:600; font-size:0.98rem;}
+  .cert-issuer{font-size:0.82rem; color:var(--sage-dim); margin-top:4px;}
+
+  /* ---------- contact ---------- */
+  .contact-panel{
+    border:1px solid var(--line); border-radius:var(--radius); padding:56px;
+    text-align:center; background:linear-gradient(180deg, rgba(19,37,33,0.6), rgba(19,37,33,0.2));
+  }
+  @media (max-width:700px){.contact-panel{padding:36px 24px;}}
+  .contact-panel h2{font-family:var(--font-display); font-weight:700; font-size:clamp(1.8rem,4vw,2.8rem);}
+  .contact-panel p{color:var(--sage); margin-top:16px; max-width:520px; margin-left:auto; margin-right:auto;}
+  .contact-links{display:flex; justify-content:center; gap:16px; margin-top:32px; flex-wrap:wrap;}
+
+  footer{padding:36px 0; border-top:1px solid var(--line);}
+  .footer-row{display:flex; justify-content:space-between; align-items:center; font-family:var(--font-mono); font-size:0.75rem; color:var(--sage-dim); flex-wrap:wrap; gap:12px;}
+
+  ::selection{background:var(--amber); color:#161008;}
+
+  :focus-visible{outline:2px solid var(--teal); outline-offset:3px;}
+</style>
+</head>
+<body>
+
+<div class="bg-grid"></div>
+<div class="bg-glow"></div>
+
+<header>
+  <nav class="nav">
+    <div class="brand"><span class="brand-dot"></span>DAMVIC VELASCO</div>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#experience">Experience</a>
+      <a href="#certs">Credentials</a>
+    </div>
+    <a class="nav-cta" href="#contact">Contact →</a>
+  </nav>
+</header>
+
+<main>
+
+  <!-- HERO -->
+  <section class="hero wrap">
+    <div class="eyebrow">Full-Stack Developer · Systems Builder · IT Graduate, Partido State University</div>
+    <h1 class="hero-title">Building the systems that <span class="accent">tell you what's happening</span>, before you have to ask.</h1>
+    <p class="hero-sub">I'm Damvic Velasco — I design and ship full-stack web apps, connect them to real-world hardware, and turn the data they generate into dashboards people actually trust. My work sits at the intersection of code, sensors, and research.</p>
+    <div class="hero-actions">
+      <a href="#projects" class="btn btn-primary">View my work</a>
+      <a href="#contact" class="btn btn-ghost">Get in touch</a>
+    </div>
+
+    <div class="readout reveal">
+      <div class="readout-head">
+        <span>SYSTEM.LOG — DVELASCO</span>
+        <span class="live">STATUS: ONLINE</span>
+      </div>
+      <div class="readout-body">
+        <div class="wave-box">
+          <svg viewBox="0 0 400 90" preserveAspectRatio="none">
+            <path class="wave-path" id="wavePath" d="M0,45 L400,45"></path>
+          </svg>
+        </div>
+        <div class="metrics">
+          <div class="metric-row"><span class="k">ROLE</span><span class="v">Full-Stack / Web &amp; IoT</span></div>
+          <div class="metric-row"><span class="k">BASE</span><span class="v">Bicol Region, PH</span></div>
+          <div class="metric-row"><span class="k">FLAGSHIP BUILD</span><span class="v">WasteWise — Smart Bin System</span></div>
+          <div class="metric-row"><span class="k">FOCUS</span><span class="v">Dashboards · Firmware-linked apps</span></div>
+        </div>
+      </div>
+      <div class="ticker-wrap">
+        <div class="ticker">
+          <span><b>Vue.js</b></span><span><b>Vite</b></span><span><b>Tailwind CSS</b></span><span><b>Firebase</b></span><span><b>Axios</b></span><span><b>Godot / GDScript</b></span><span><b>Power BI</b></span><span><b>SQL</b></span><span><b>LaTeX</b></span><span><b>Research &amp; Documentation</b></span>
+          <span><b>Vue.js</b></span><span><b>Vite</b></span><span><b>Tailwind CSS</b></span><span><b>Firebase</b></span><span><b>Axios</b></span><span><b>Godot / GDScript</b></span><span><b>Power BI</b></span><span><b>SQL</b></span><span><b>LaTeX</b></span><span><b>Research &amp; Documentation</b></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" class="wrap">
+    <div class="section-head reveal">
+      <span class="section-tag">01 — About</span>
+      <h2 class="section-title">From lecture hall to lab bench to production.</h2>
+    </div>
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <p>I graduated with a <strong>BS in Information Technology from Partido State University</strong> in 2026, but the more useful way to describe me is: someone who likes taking a messy real-world problem, building a working system for it, and writing down what actually happened along the way.</p>
+        <p>That's the throughline across my capstone, my internship, and my side projects — <strong>full-stack web development, game development in Godot, data analysis, and academic research</strong> aren't separate hats to me. They're the same skill, applied to different materials: understand the problem, build the smallest working version, then make it legible to whoever needs to trust it.</p>
+        <p>Most recently, I completed a <strong>486-hour internship</strong> in the Department of Computational Sciences at Partido State University, working as both a full-stack developer and a research documenter.</p>
+        <div class="lang-row">
+          <span class="lang-pill">Bikol</span>
+          <span class="lang-pill">English</span>
+          <span class="lang-pill">Tagalog</span>
+        </div>
+      </div>
+      <div class="stat-panel reveal">
+        <div class="stat-row"><span class="label">DEGREE</span><span class="value">BS Information Technology</span></div>
+        <div class="stat-row"><span class="label">GRADUATED</span><span class="value">2026</span></div>
+        <div class="stat-row"><span class="label">INTERNSHIP HOURS</span><span class="value">486 hrs</span></div>
+        <div class="stat-row"><span class="label">CAPSTONE</span><span class="value">WasteWise</span></div>
+        <div class="stat-row"><span class="label">ENGLISH PROFICIENCY</span><span class="value">CEFR C2</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills" class="wrap">
+    <div class="section-head reveal">
+      <span class="section-tag">02 — Capabilities</span>
+      <h2 class="section-title">What I bring to a build.</h2>
+      <p class="section-desc">Five modules, one habit connecting them: ship something working, then document it well enough that someone else could pick it up.</p>
+    </div>
+    <div class="module-grid">
+      <div class="module reveal">
+        <span class="module-id">MODULE / 01</span>
+        <h3 class="module-title">Web Development</h3>
+        <ul>
+          <li>Vue.js &amp; Vite for front-end apps</li>
+          <li>Tailwind CSS for interface systems</li>
+          <li>Axios for API integration</li>
+          <li>Firebase for auth &amp; realtime data</li>
+        </ul>
+      </div>
+      <div class="module reveal">
+        <span class="module-id">MODULE / 02</span>
+        <h3 class="module-title">Data &amp; Systems</h3>
+        <ul>
+          <li>SQL &amp; relational database design</li>
+          <li>Power BI dashboards &amp; reporting</li>
+          <li>Real-time monitoring interfaces</li>
+          <li>Debugging &amp; technical troubleshooting</li>
+        </ul>
+      </div>
+      <div class="module reveal">
+        <span class="module-id">MODULE / 03</span>
+        <h3 class="module-title">Game Development</h3>
+        <ul>
+          <li>Godot engine, 2D &amp; 3D projects</li>
+          <li>GDScript gameplay programming</li>
+          <li>Original title: "Tunnel Runners"</li>
+        </ul>
+      </div>
+      <div class="module reveal">
+        <span class="module-id">MODULE / 04</span>
+        <h3 class="module-title">Research &amp; Writing</h3>
+        <ul>
+          <li>Literature review &amp; chapter writing</li>
+          <li>Markdown &amp; LaTeX for formal docs</li>
+          <li>Project documentation &amp; presentation prep</li>
+        </ul>
+      </div>
+      <div class="module reveal">
+        <span class="module-id">MODULE / 05</span>
+        <h3 class="module-title">Interface &amp; UI</h3>
+        <ul>
+          <li>Usability-first UI design</li>
+          <li>Consistent, accessible component systems</li>
+          <li>Dashboard &amp; data-visualization layouts</li>
+        </ul>
+      </div>
+      <div class="module reveal">
+        <span class="module-id">MODULE / 06</span>
+        <h3 class="module-title">How I Work</h3>
+        <ul>
+          <li>Self-directed learning &amp; adaptability</li>
+          <li>Time management &amp; attention to detail</li>
+          <li>Persistence through long builds</li>
+          <li>Team collaboration</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects" class="wrap">
+    <div class="section-head reveal">
+      <span class="section-tag">03 — Selected Work</span>
+      <h2 class="section-title">Projects I've built, end to end.</h2>
+    </div>
+
+    <div class="flagship reveal">
+      <div class="flagship-visual">
+        <svg class="diagram" viewBox="0 0 300 220" fill="none">
+          <rect x="20" y="150" width="60" height="50" rx="6" stroke="#4fd1c5" stroke-width="1.5"/>
+          <circle cx="50" cy="140" r="5" fill="#e8a33d"/>
+          <path d="M50 145 L50 100" stroke="#233a34" stroke-width="1.5"/>
+          <path d="M50 100 L150 100" stroke="#233a34" stroke-width="1.5"/>
+          <path d="M150 100 L150 60" stroke="#233a34" stroke-width="1.5"/>
+          <rect x="105" y="20" width="140" height="45" rx="8" stroke="#8ba39a" stroke-width="1.5"/>
+          <text x="120" y="38" fill="#8ba39a" font-family="IBM Plex Mono" font-size="9">CAMPUS WIFI</text>
+          <text x="120" y="52" fill="#f3efe6" font-family="IBM Plex Mono" font-size="9">DASHBOARD</text>
+          <path d="M150 100 L250 100 L250 60" stroke="#233a34" stroke-width="1.5"/>
+          <rect x="220" y="150" width="60" height="50" rx="6" stroke="#4fd1c5" stroke-width="1.5"/>
+          <circle cx="250" cy="140" r="5" fill="#e8a33d"/>
+          <path d="M250 145 L250 100" stroke="#233a34" stroke-width="1.5"/>
+          <text x="26" y="180" fill="#8ba39a" font-family="IBM Plex Mono" font-size="8">BIN A</text>
+          <text x="226" y="180" fill="#8ba39a" font-family="IBM Plex Mono" font-size="8">BIN B</text>
+        </svg>
+      </div>
+      <div class="flagship-body">
+        <span class="module-id">FLAGSHIP · CAPSTONE PROJECT</span>
+        <h3 class="flagship-title">WasteWise</h3>
+        <div class="tag-row">
+          <span class="tag">Vue.js</span><span class="tag">ESP32 / IoT</span><span class="tag">Real-Time Dashboard</span><span class="tag">Capstone</span>
+        </div>
+        <p class="flagship-desc">A campus, WiFi-connected smart bin system that reads fill levels from ESP32 sensors and streams them into a real-time monitoring dashboard — letting facilities staff see which bins need attention without walking the campus to check. Built as my capstone project and continued as an open engineering project.</p>
+        <a class="proj-link" href="https://github.com/Damdam03/WasteWise" target="_blank" rel="noopener">View repository ↗</a>
+      </div>
+    </div>
+
+    <div class="proj-grid">
+      <div class="proj-card reveal">
+        <span class="stack">HTML</span>
+        <h3>Computer Laboratory Management System</h3>
+        <p>An evaluation-focused system for managing computer laboratory scheduling and usage, built for academic assessment.</p>
+        <a class="proj-link" href="https://github.com/Damdam03/Computer-Laboratory-Management-System-Evaluation" target="_blank" rel="noopener">View repository ↗</a>
+      </div>
+      <div class="proj-card reveal">
+        <span class="stack">HTML</span>
+        <h3>MedCare — Sample Design</h3>
+        <p>A sample interface design for a MedCare web app, exploring layout and usability patterns for healthcare-facing products.</p>
+        <a class="proj-link" href="https://github.com/Damdam03/MedCare-Sample-Design" target="_blank" rel="noopener">View repository ↗</a>
+      </div>
+      <div class="proj-card reveal">
+        <span class="stack">JavaScript</span>
+        <h3>Snake Game</h3>
+        <p>A browser-based recreation of the classic Snake game, built to sharpen core JavaScript logic and game-loop fundamentals.</p>
+        <a class="proj-link" href="https://github.com/Damdam03/Snake_Game" target="_blank" rel="noopener">View repository ↗</a>
+      </div>
+      <div class="proj-card reveal">
+        <span class="stack">GDScript · Godot</span>
+        <h3>3D Game (Godot)</h3>
+        <p>A 3D game project built in Godot, used to explore three-dimensional movement, camera systems, and scene composition.</p>
+        <a class="proj-link" href="https://github.com/Damdam03/3D-Game_GODOT" target="_blank" rel="noopener">View repository ↗</a>
+      </div>
+      <div class="proj-card reveal">
+        <span class="stack">GDScript · Godot</span>
+        <h3>2D Game (Godot)</h3>
+        <p>A 2D game built in Godot, focused on gameplay mechanics and GDScript scripting fundamentals.</p>
+        <a class="proj-link" href="https://github.com/Damdam03/2D-Game_Godot" target="_blank" rel="noopener">View repository ↗</a>
+      </div>
+      <div class="proj-card reveal">
+        <span class="stack">Godot · GDScript</span>
+        <h3>Tunnel Runners</h3>
+        <p>An original game concept created during my studies, developed end-to-end from mechanic design through to a playable build.</p>
+        <a class="proj-link" href="https://github.com/Damdam03" target="_blank" rel="noopener">View GitHub profile ↗</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE / TIMELINE -->
+  <section id="experience" class="wrap">
+    <div class="section-head reveal">
+      <span class="section-tag">04 — Timeline</span>
+      <h2 class="section-title">How I got here.</h2>
+    </div>
+    <div class="timeline">
+      <div class="t-item reveal">
+        <div class="t-dot"></div>
+        <div class="t-date">2019</div>
+        <div class="t-title">Completed Senior High School — Bonifacio D. Borebor Sr. High School</div>
+        <div class="t-desc">Graduated with a Research and Innovation Award and a Service Award.</div>
+      </div>
+      <div class="t-item reveal">
+        <div class="t-dot"></div>
+        <div class="t-date">2025</div>
+        <div class="t-title">Digital &amp; Cybersecurity Foundations</div>
+        <div class="t-desc">Completed coursework in Cybersecurity for Today's Digital World, FutureTech Edu, and Digital Literacy.</div>
+      </div>
+      <div class="t-item reveal">
+        <div class="t-dot"></div>
+        <div class="t-date">Jan – Apr 2026</div>
+        <div class="t-title">IT Intern — Partido State University</div>
+        <div class="t-desc">486-hour internship in the Department of Computational Sciences, working as a Full-Stack Developer and Research Documenter.</div>
+      </div>
+      <div class="t-item reveal">
+        <div class="t-dot"></div>
+        <div class="t-date">2026</div>
+        <div class="t-title">Graduated — BS Information Technology, Partido State University</div>
+        <div class="t-desc">Completed capstone project "WasteWise," a campus WiFi-connected smart bin system with real-time dashboard monitoring.</div>
+      </div>
+      <div class="t-item reveal">
+        <div class="t-dot"></div>
+        <div class="t-date">Jul 2026</div>
+        <div class="t-title">CEFR C2 English Certification</div>
+        <div class="t-desc">Achieved Advanced/Mastery level in English Grammar &amp; Vocabulary proficiency.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CERTS -->
+  <section id="certs" class="wrap">
+    <div class="section-head reveal">
+      <span class="section-tag">05 — Credentials</span>
+      <h2 class="section-title">Certifications &amp; recognitions.</h2>
+    </div>
+    <div class="cert-grid">
+      <div class="cert reveal">
+        <span class="cert-mark">C2</span>
+        <div>
+          <div class="cert-name">English Grammar &amp; Vocabulary Proficiency</div>
+          <div class="cert-issuer">CEFR — Advanced / Mastery · Jul 2026</div>
+        </div>
+      </div>
+      <div class="cert reveal">
+        <span class="cert-mark">SEC</span>
+        <div>
+          <div class="cert-name">Cybersecurity for Today's Digital World</div>
+          <div class="cert-issuer">Completed Apr 2025</div>
+        </div>
+      </div>
+      <div class="cert reveal">
+        <span class="cert-mark">TECH</span>
+        <div>
+          <div class="cert-name">FutureTech Edu 2025</div>
+          <div class="cert-issuer">Completed Oct 2025</div>
+        </div>
+      </div>
+      <div class="cert reveal">
+        <span class="cert-mark">LIT</span>
+        <div>
+          <div class="cert-name">Digital Literacy</div>
+          <div class="cert-issuer">Completed Nov 2025</div>
+        </div>
+      </div>
+      <div class="cert reveal">
+        <span class="cert-mark">486H</span>
+        <div>
+          <div class="cert-name">Certificate of Internship</div>
+          <div class="cert-issuer">Dept. of Computational Sciences, Partido State University</div>
+        </div>
+      </div>
+      <div class="cert reveal">
+        <span class="cert-mark">R&amp;I</span>
+        <div>
+          <div class="cert-name">Research and Innovation Award</div>
+          <div class="cert-issuer">Bonifacio D. Borebor Sr. High School, 2019</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="wrap">
+    <div class="contact-panel reveal">
+      <span class="section-tag">06 — Contact</span>
+      <h2>Let's build something that works.</h2>
+      <p>Open to full-stack development, junior developer, and IT support roles — and always glad to talk through a data or IoT problem.</p>
+      <div class="contact-links">
+        <a class="btn btn-primary" href="mailto:velascodamdam19@gmail.com">Email me</a>
+        <a class="btn btn-ghost" href="tel:+639630170995">+63 963 017 0995</a>
+        <a class="btn btn-ghost" href="https://github.com/Damdam03" target="_blank" rel="noopener">GitHub ↗</a>
+        <a class="btn btn-ghost" href="https://www.linkedin.com/in/damvic-velasco-2905b038b/" target="_blank" rel="noopener">LinkedIn ↗</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap footer-row">
+    <span>© 2026 Damvic Velasco</span>
+    <span>Built with Vue-adjacent stubbornness &amp; a lot of debugging.</span>
+  </div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        entry.target.classList.add('is-visible');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  revealEls.forEach(el => io.observe(el));
+
+  // Animated waveform pulse in hero readout
+  const wavePath = document.getElementById('wavePath');
+  let t = 0;
+  function buildWave(offset){
+    const points = [];
+    const width = 400, height = 90, mid = 45;
+    for(let x = 0; x <= width; x += 8){
+      let y = mid;
+      const p = x + offset;
+      // baseline flat with occasional pulse spikes, echoing a sensor readout
+      const spike = Math.sin(p / 40) * 4;
+      const burst = (Math.floor(p / 90) % 3 === 0) ? Math.sin(p / 6) * 18 * Math.exp(-Math.pow((p % 90) - 20, 2)/120) : 0;
+      y = mid - spike - burst;
+      points.push(x + ',' + y.toFixed(1));
+    }
+    return 'M' + points.join(' L');
+  }
+  function animateWave(){
+    t += 3;
+    wavePath.setAttribute('d', buildWave(t));
+    requestAnimationFrame(animateWave);
+  }
+  if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+    animateWave();
+  } else {
+    wavePath.setAttribute('d', buildWave(0));
+  }
+</script>
+
+</body>
+</html>
