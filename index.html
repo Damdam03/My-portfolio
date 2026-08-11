@@ -355,8 +355,8 @@
       </div>
       <div class="ticker-wrap">
         <div class="ticker">
-          <span><b>Vue.js</b></span><span><b>Vite</b></span><span><b>Tailwind CSS</b></span><span><b>Firebase</b></span><span><b>Axios</b></span><span><b>Godot / GDScript</b></span><span><b>Power BI</b></span><span><b>SQL</b></span><span><b>LaTeX</b></span><span><b>Research &amp; Documentation</b></span>
-          <span><b>Vue.js</b></span><span><b>Vite</b></span><span><b>Tailwind CSS</b></span><span><b>Firebase</b></span><span><b>Axios</b></span><span><b>Godot / GDScript</b></span><span><b>Power BI</b></span><span><b>SQL</b></span><span><b>LaTeX</b></span><span><b>Research &amp; Documentation</b></span>
+          <span><b>Vue.js</b></span><span><b>React</b></span><span><b>Vite</b></span><span><b>Node / Express</b></span><span><b>Tailwind CSS</b></span><span><b>PostgreSQL / Prisma</b></span><span><b>Firebase</b></span><span><b>Auth0</b></span><span><b>Stripe</b></span><span><b>Axios</b></span><span><b>Godot / GDScript</b></span><span><b>Power BI</b></span><span><b>SQL</b></span><span><b>LaTeX</b></span><span><b>Research &amp; Documentation</b></span>
+          <span><b>Vue.js</b></span><span><b>React</b></span><span><b>Vite</b></span><span><b>Node / Express</b></span><span><b>Tailwind CSS</b></span><span><b>PostgreSQL / Prisma</b></span><span><b>Firebase</b></span><span><b>Auth0</b></span><span><b>Stripe</b></span><span><b>Axios</b></span><span><b>Godot / GDScript</b></span><span><b>Power BI</b></span><span><b>SQL</b></span><span><b>LaTeX</b></span><span><b>Research &amp; Documentation</b></span>
         </div>
       </div>
     </div>
@@ -401,10 +401,11 @@
         <span class="module-id">MODULE / 01</span>
         <h3 class="module-title">Web Development</h3>
         <ul>
-          <li>Vue.js &amp; Vite for front-end apps</li>
-          <li>Tailwind CSS for interface systems</li>
-          <li>Axios for API integration</li>
-          <li>Firebase for auth &amp; realtime data</li>
+          <li>Vue.js &amp; React front-ends, Vite tooling</li>
+          <li>Node.js / Express APIs</li>
+          <li>PostgreSQL with Prisma ORM</li>
+          <li>Auth0 authentication, Stripe payments</li>
+          <li>Tailwind CSS &amp; Firebase</li>
         </ul>
       </div>
       <div class="module reveal">
@@ -497,7 +498,41 @@
       </div>
     </div>
 
+    <div class="flagship reveal">
+      <div class="flagship-body" style="order:1;">
+        <span class="module-id">FLAGSHIP · FULL-STACK BUILD</span>
+        <h3 class="flagship-title">VeloCommerce</h3>
+        <div class="tag-row">
+          <span class="tag">React / Vite</span><span class="tag">Node / Express</span><span class="tag">PostgreSQL / Prisma</span><span class="tag">Auth0</span><span class="tag">Stripe</span>
+        </div>
+        <p class="flagship-desc">A full-stack e-commerce platform built to production standards: a public product catalog, cart, and secure checkout with Stripe (test mode), Auth0-backed authentication, order history, and an admin dashboard. Prices are recalculated server-side on checkout so the charge always matches authoritative product data — not a value the client sent. Ships with a GitHub Actions workflow that runs lint and tests on every push.</p>
+        <a class="proj-link" href="https://github.com/Damdam03/VeloCommerce" target="_blank" rel="noopener">View repository ↗</a>
+      </div>
+      <div class="flagship-visual" style="order:2; border-right:none; border-left:1px solid var(--line);">
+        <svg class="diagram" viewBox="0 0 300 220" fill="none">
+          <rect x="20" y="20" width="100" height="40" rx="8" stroke="#4fd1c5" stroke-width="1.5"/>
+          <text x="32" y="44" fill="#f3efe6" font-family="IBM Plex Mono" font-size="9">REACT CLIENT</text>
+          <path d="M70 60 L70 90" stroke="#233a34" stroke-width="1.5"/>
+          <rect x="20" y="90" width="100" height="40" rx="8" stroke="#8ba39a" stroke-width="1.5"/>
+          <text x="34" y="114" fill="#8ba39a" font-family="IBM Plex Mono" font-size="9">EXPRESS API</text>
+          <path d="M70 130 L70 160" stroke="#233a34" stroke-width="1.5"/>
+          <rect x="20" y="160" width="100" height="40" rx="8" stroke="#4fd1c5" stroke-width="1.5"/>
+          <text x="30" y="184" fill="#f3efe6" font-family="IBM Plex Mono" font-size="9">POSTGRESQL</text>
+          <path d="M120 110 L160 110" stroke="#233a34" stroke-width="1.5"/>
+          <rect x="160" y="90" width="110" height="40" rx="8" stroke="#e8a33d" stroke-width="1.5"/>
+          <text x="172" y="106" fill="#e8a33d" font-family="IBM Plex Mono" font-size="8">AUTH0 / JWT</text>
+          <text x="172" y="120" fill="#e8a33d" font-family="IBM Plex Mono" font-size="8">STRIPE PAY</text>
+        </svg>
+      </div>
+    </div>
+
     <div class="proj-grid">
+      <div class="proj-card reveal">
+        <span class="stack">React · Node · PostgreSQL</span>
+        <h3>HR — Appointment Scheduling Platform</h3>
+        <p>A public-service appointment booking system with a protected admin console for managing job positions and time slots, built on React/TypeScript, Express, PostgreSQL, and Auth0-gated admin routes.</p>
+        <a class="proj-link" href="https://github.com/Damdam03/HR" target="_blank" rel="noopener">View repository ↗</a>
+      </div>
       <div class="proj-card reveal">
         <span class="stack">HTML</span>
         <h3>Computer Laboratory Management System</h3>
@@ -533,6 +568,12 @@
         <h3>Tunnel Runners</h3>
         <p>An original game concept created during my studies, developed end-to-end from mechanic design through to a playable build.</p>
         <a class="proj-link" href="https://github.com/Damdam03" target="_blank" rel="noopener">View GitHub profile ↗</a>
+      </div>
+      <div class="proj-card reveal">
+        <span class="stack">UI Components</span>
+        <h3>CS-UI</h3>
+        <p>A packaged set of UI components built for a computer science project — a compact exploration of reusable interface pieces outside of a full application context.</p>
+        <a class="proj-link" href="https://github.com/Damdam03/cs-ui" target="_blank" rel="noopener">View repository ↗</a>
       </div>
     </div>
   </section>
