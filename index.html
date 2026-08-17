@@ -199,6 +199,28 @@
   .stat-row .label{font-family:var(--font-mono); font-size:0.8rem; color:var(--sage);}
   .stat-row .value{font-family:var(--font-display); font-weight:600; font-size:1.15rem; text-align:right;}
 
+  .portrait-frame{
+    position:relative; border:1px solid var(--line); border-radius:var(--radius);
+    padding:14px; background:var(--panel); margin-bottom:20px;
+  }
+  .portrait-frame img{
+    width:100%; display:block; border-radius:8px; filter:grayscale(15%) contrast(1.05);
+  }
+  .portrait-frame .corner{
+    position:absolute; width:16px; height:16px; border:2px solid var(--teal);
+  }
+  .portrait-frame .corner.tl{top:6px; left:6px; border-right:none; border-bottom:none;}
+  .portrait-frame .corner.br{bottom:6px; right:6px; border-left:none; border-top:none;}
+  .portrait-caption{
+    display:flex; justify-content:space-between; align-items:center;
+    font-family:var(--font-mono); font-size:0.7rem; color:var(--sage); padding:10px 4px 2px;
+  }
+  .portrait-caption .live{color:var(--teal); display:flex; align-items:center; gap:6px;}
+  .portrait-caption .live::before{
+    content:''; width:6px; height:6px; border-radius:50%; background:var(--teal);
+    animation:pulse-dot 2s ease-in-out infinite;
+  }
+
   /* ---------- skills modules ---------- */
   .module-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:20px;}
   @media (max-width:900px){.module-grid{grid-template-columns:repeat(2,1fr);}}
@@ -327,7 +349,7 @@
 
   <!-- HERO -->
   <section class="hero wrap">
-    <div class="eyebrow">Full-Stack Developer · Systems Builder · IT Graduate, Partido State University</div>
+    <div class="eyebrow">Full-Stack Software Engineer · Web &amp; IoT Systems Builder</div>
     <h1 class="hero-title">Building the systems that <span class="accent">tell you what's happening</span>, before you have to ask.</h1>
     <p class="hero-sub">I'm Damvic Velasco — I design and ship full-stack web apps, connect them to real-world hardware, and turn the data they generate into dashboards people actually trust. My work sits at the intersection of code, sensors, and research.</p>
     <div class="hero-actions">
@@ -348,15 +370,15 @@
         </div>
         <div class="metrics">
           <div class="metric-row"><span class="k">ROLE</span><span class="v">Full-Stack / Web &amp; IoT</span></div>
-          <div class="metric-row"><span class="k">BASE</span><span class="v">Bicol Region, PH</span></div>
+          <div class="metric-row"><span class="k">BASE</span><span class="v">Caramoan, Camarines Sur, PH</span></div>
           <div class="metric-row"><span class="k">FLAGSHIP BUILD</span><span class="v">WasteWise — Smart Bin System</span></div>
           <div class="metric-row"><span class="k">FOCUS</span><span class="v">Dashboards · Firmware-linked apps</span></div>
         </div>
       </div>
       <div class="ticker-wrap">
         <div class="ticker">
-          <span><b>Vue.js</b></span><span><b>React</b></span><span><b>Vite</b></span><span><b>Node / Express</b></span><span><b>Tailwind CSS</b></span><span><b>PostgreSQL / Prisma</b></span><span><b>Firebase</b></span><span><b>Auth0</b></span><span><b>Stripe</b></span><span><b>Axios</b></span><span><b>Godot / GDScript</b></span><span><b>Power BI</b></span><span><b>SQL</b></span><span><b>LaTeX</b></span><span><b>Research &amp; Documentation</b></span>
-          <span><b>Vue.js</b></span><span><b>React</b></span><span><b>Vite</b></span><span><b>Node / Express</b></span><span><b>Tailwind CSS</b></span><span><b>PostgreSQL / Prisma</b></span><span><b>Firebase</b></span><span><b>Auth0</b></span><span><b>Stripe</b></span><span><b>Axios</b></span><span><b>Godot / GDScript</b></span><span><b>Power BI</b></span><span><b>SQL</b></span><span><b>LaTeX</b></span><span><b>Research &amp; Documentation</b></span>
+          <span><b>Vue.js</b></span><span><b>React</b></span><span><b>Vite</b></span><span><b>Node / Express</b></span><span><b>PHP</b></span><span><b>Tailwind CSS</b></span><span><b>PostgreSQL / Prisma</b></span><span><b>MySQL</b></span><span><b>Firebase</b></span><span><b>Auth0</b></span><span><b>Stripe</b></span><span><b>Axios</b></span><span><b>Godot / GDScript</b></span><span><b>Power BI</b></span><span><b>SQL</b></span><span><b>Application Security</b></span><span><b>LaTeX</b></span><span><b>Research &amp; Documentation</b></span>
+          <span><b>Vue.js</b></span><span><b>React</b></span><span><b>Vite</b></span><span><b>Node / Express</b></span><span><b>PHP</b></span><span><b>Tailwind CSS</b></span><span><b>PostgreSQL / Prisma</b></span><span><b>MySQL</b></span><span><b>Firebase</b></span><span><b>Auth0</b></span><span><b>Stripe</b></span><span><b>Axios</b></span><span><b>Godot / GDScript</b></span><span><b>Power BI</b></span><span><b>SQL</b></span><span><b>Application Security</b></span><span><b>LaTeX</b></span><span><b>Research &amp; Documentation</b></span>
         </div>
       </div>
     </div>
@@ -379,12 +401,25 @@
           <span class="lang-pill">Tagalog</span>
         </div>
       </div>
-      <div class="stat-panel reveal">
+      <div class="reveal">
+        <div class="portrait-frame">
+          <span class="corner tl"></span>
+          <span class="corner br"></span>
+          <img src="data:image/jpeg;base64,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" alt="Damvic Ombao Velasco">
+        </div>
+        <div class="portrait-caption">
+          <span>DVELASCO.PROFILE</span>
+          <span class="live">ONLINE</span>
+        </div>
+        <div class="stat-panel">
+        <div class="stat-row"><span class="label">FULL NAME</span><span class="value">Damvic Ombao Velasco</span></div>
+        <div class="stat-row"><span class="label">HOMETOWN</span><span class="value">Caramoan, Camarines Sur</span></div>
         <div class="stat-row"><span class="label">DEGREE</span><span class="value">BS Information Technology</span></div>
         <div class="stat-row"><span class="label">GRADUATED</span><span class="value">2026</span></div>
         <div class="stat-row"><span class="label">INTERNSHIP HOURS</span><span class="value">486 hrs</span></div>
         <div class="stat-row"><span class="label">CAPSTONE</span><span class="value">WasteWise</span></div>
         <div class="stat-row"><span class="label">ENGLISH PROFICIENCY</span><span class="value">CEFR C2</span></div>
+        </div>
       </div>
     </div>
   </section>
@@ -413,8 +448,10 @@
         <h3 class="module-title">Data &amp; Systems</h3>
         <ul>
           <li>SQL &amp; relational database design</li>
+          <li>PHP backend development</li>
           <li>Power BI dashboards &amp; reporting</li>
           <li>Real-time monitoring interfaces</li>
+          <li>Application security (auth, CSRF, rate limiting)</li>
           <li>Debugging &amp; technical troubleshooting</li>
         </ul>
       </div>
@@ -526,6 +563,40 @@
       </div>
     </div>
 
+    <div class="flagship reveal">
+      <div class="flagship-visual">
+        <svg class="diagram" viewBox="0 0 300 220" fill="none">
+          <rect x="110" y="15" width="80" height="34" rx="7" stroke="#e8a33d" stroke-width="1.5"/>
+          <text x="122" y="36" fill="#e8a33d" font-family="IBM Plex Mono" font-size="8">AUTH + CSRF</text>
+          <path d="M150 49 L150 75" stroke="#233a34" stroke-width="1.5"/>
+          <path d="M150 75 L60 75 L60 100" stroke="#233a34" stroke-width="1.5"/>
+          <path d="M150 75 L150 100" stroke="#233a34" stroke-width="1.5"/>
+          <path d="M150 75 L240 75 L240 100" stroke="#233a34" stroke-width="1.5"/>
+          <rect x="15" y="100" width="90" height="38" rx="7" stroke="#4fd1c5" stroke-width="1.5"/>
+          <text x="27" y="122" fill="#f3efe6" font-family="IBM Plex Mono" font-size="8">ADMIN PANEL</text>
+          <rect x="105" y="100" width="90" height="38" rx="7" stroke="#4fd1c5" stroke-width="1.5"/>
+          <text x="120" y="122" fill="#f3efe6" font-family="IBM Plex Mono" font-size="8">SELLER HUB</text>
+          <rect x="195" y="100" width="90" height="38" rx="7" stroke="#4fd1c5" stroke-width="1.5"/>
+          <text x="212" y="122" fill="#f3efe6" font-family="IBM Plex Mono" font-size="8">BUYER HUB</text>
+          <path d="M60 138 L60 160" stroke="#233a34" stroke-width="1.5"/>
+          <path d="M150 138 L150 160" stroke="#233a34" stroke-width="1.5"/>
+          <path d="M240 138 L240 160" stroke="#233a34" stroke-width="1.5"/>
+          <path d="M60 160 L240 160" stroke="#233a34" stroke-width="1.5"/>
+          <rect x="90" y="160" width="120" height="36" rx="7" stroke="#8ba39a" stroke-width="1.5"/>
+          <text x="105" y="182" fill="#8ba39a" font-family="IBM Plex Mono" font-size="8">MySQL (PDO)</text>
+        </svg>
+      </div>
+      <div class="flagship-body">
+        <span class="module-id">FLAGSHIP · OJT PROJECT</span>
+        <h3 class="flagship-title">Partido Product Online Market Hub</h3>
+        <div class="tag-row">
+          <span class="tag">PHP 8</span><span class="tag">MySQL / PDO</span><span class="tag">Tailwind CSS</span><span class="tag">Security Engineering</span>
+        </div>
+        <p class="flagship-desc">A peer-to-peer marketplace platform connecting local buyers and sellers, with role-based dashboards for admins, sellers, and buyers, plus built-in messaging and deal tracking. Built as a requirement for my OJT, with a real focus on application security: bcrypt password hashing, CSRF-protected forms, rate-limited login attempts, session timeouts, and PDO prepared statements throughout to prevent SQL injection.</p>
+        <a class="proj-link" href="https://github.com/dovelascopbox-bit/Partido-Product-Online-Market-Hub" target="_blank" rel="noopener">View repository ↗</a>
+      </div>
+    </div>
+
     <div class="proj-grid">
       <div class="proj-card reveal">
         <span class="stack">React · Node · PostgreSQL</span>
@@ -587,15 +658,32 @@
     <div class="timeline">
       <div class="t-item reveal">
         <div class="t-dot"></div>
-        <div class="t-date">2019</div>
-        <div class="t-title">Completed Senior High School — Bonifacio D. Borebor Sr. High School</div>
-        <div class="t-desc">Graduated with a Research and Innovation Award and a Service Award.</div>
+        <div class="t-date">2013</div>
+        <div class="t-title">Completed Elementary — Caramoan Central School</div>
+        <div class="t-desc">Grew up and studied in Caramoan, Camarines Sur.</div>
       </div>
       <div class="t-item reveal">
         <div class="t-dot"></div>
-        <div class="t-date">2025</div>
-        <div class="t-title">Digital &amp; Cybersecurity Foundations</div>
-        <div class="t-desc">Completed coursework in Cybersecurity for Today's Digital World, FutureTech Edu, and Digital Literacy.</div>
+        <div class="t-date">2017</div>
+        <div class="t-title">Completed Junior High School — United High School</div>
+      </div>
+      <div class="t-item reveal">
+        <div class="t-dot"></div>
+        <div class="t-date">2018</div>
+        <div class="t-title">Started volunteering with GAMI-AW, Caramoan</div>
+        <div class="t-desc">Ongoing community service membership, ties into the same year I began a technical-vocational work immersion program in Computer System Servicing.</div>
+      </div>
+      <div class="t-item reveal">
+        <div class="t-dot"></div>
+        <div class="t-date">2019</div>
+        <div class="t-title">Completed Senior High School — Bonifacio D. Borebor Sr. High School</div>
+        <div class="t-desc">Computer System Servicing track. Graduated with a Research and Innovation Award and a Service Award, and completed Disaster Risk Reduction Management training the same year.</div>
+      </div>
+      <div class="t-item reveal">
+        <div class="t-dot"></div>
+        <div class="t-date">2019 – 2026</div>
+        <div class="t-title">BS Information Technology — Partido State University</div>
+        <div class="t-desc">Along the way: a local-history webinar through the Bandilyo Project (2023), a short freelance development stint (Aug 2025), and a run of technical seminars covering innovation, cybersecurity, and AI (2025).</div>
       </div>
       <div class="t-item reveal">
         <div class="t-dot"></div>
@@ -663,8 +751,22 @@
       <div class="cert reveal">
         <span class="cert-mark">R&amp;I</span>
         <div>
-          <div class="cert-name">Research and Innovation Award</div>
+          <div class="cert-name">Research and Innovation Award &amp; Service Award</div>
           <div class="cert-issuer">Bonifacio D. Borebor Sr. High School, 2019</div>
+        </div>
+      </div>
+      <div class="cert reveal">
+        <span class="cert-mark">DRRM</span>
+        <div>
+          <div class="cert-name">Disaster Risk Reduction Management Training</div>
+          <div class="cert-issuer">Partido State University – Goa Campus, 2019</div>
+        </div>
+      </div>
+      <div class="cert reveal">
+        <span class="cert-mark">GAMI</span>
+        <div>
+          <div class="cert-name">GAMI-AW Organization — Member</div>
+          <div class="cert-issuer">Community service, Caramoan, Camarines Sur · 2018 – Present</div>
         </div>
       </div>
     </div>
@@ -680,6 +782,7 @@
         <a class="btn btn-primary" href="mailto:velascodamdam19@gmail.com">Email me</a>
         <a class="btn btn-ghost" href="tel:+639630170995">+63 963 017 0995</a>
         <a class="btn btn-ghost" href="https://github.com/Damdam03" target="_blank" rel="noopener">GitHub ↗</a>
+        <a class="btn btn-ghost" href="https://github.com/dovelascopbox-bit" target="_blank" rel="noopener">GitHub (OJT) ↗</a>
         <a class="btn btn-ghost" href="https://www.linkedin.com/in/damvic-velasco-2905b038b/" target="_blank" rel="noopener">LinkedIn ↗</a>
       </div>
     </div>
